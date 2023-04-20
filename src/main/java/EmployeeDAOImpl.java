@@ -63,10 +63,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 int ageEmployee = resultSet.getInt("age");
                 int cityId = resultSet.getInt("city_id");
 
-                if (idEmployee == id) {
-                    employee = new Employee(id, firstName, lastName, gender, ageEmployee, cityId);
-
-                }
+                employee = new Employee(id, firstName, lastName, gender, ageEmployee, cityId);
 
             }
         } catch (SQLException e) {
@@ -77,8 +74,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public void updateEmployee(int id) {
-        String sql = "UPDATE employee SET first_name = 'Ivan' WHERE id =" + id;
+    public void updateEmployee(int id, String name, String surname, String gender, int age, int cityId) {
+        String sql = "UPDATE employee SET first_name = '" + name + "', last_name = '" + surname + "', gender = '" + gender + "', age = " + age + ",city_id = " + cityId + " WHERE id =" + id;
         try (final Connection connection = DriverManager.getConnection(url, user, password);
              PreparedStatement statement = connection.prepareStatement(sql)) {
             System.out.println("Сотрудник изменен");

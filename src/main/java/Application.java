@@ -39,7 +39,7 @@ public class Application {
         employeeDAO.addEmployee(employees);
         System.out.println(employeeDAO.getEmployeeById(1));
         System.out.println();
-        employeeDAO.updateEmployee(5);
+        employeeDAO.updateEmployee(6, "Petr", "Petrov", "male", 31, 5);
         employeeDAO.deleteEmployee(9);
 
         List<Employee> employeeList = employeeDAO.getAllEmployee();

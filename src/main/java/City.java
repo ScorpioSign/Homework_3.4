@@ -1,18 +1,41 @@
+import javax.persistence.*;
+import java.util.List;
+
+
+@Entity
+@Table(name = "city")
 public class City {
-    private int city_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "city_id")
+    private Integer cityId;
+    @Column(name = "name")
     private String name;
 
-    public City(int city_id, String name) {
-        this.city_id = city_id;
+
+
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    private List<Employee> employees;
+   public City() {
+
+   }
+    public City(int cityId, String name) {
+        this.cityId = cityId;
         this.name = name;
     }
 
-    public int getCity_id() {
-        return city_id;
+    public City( String name, List<Employee> employees) {
+
+        this.name = name;
+        this.employees = employees;
     }
 
-    public void setCity_id(int city_id) {
-        this.city_id = city_id;
+    public Integer getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
     }
 
     public String getName() {
@@ -23,11 +46,20 @@ public class City {
         this.name = name;
     }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
     @Override
     public String toString() {
-        return "City{" +
-                "city_id=" + city_id +
-                ", name='" + name + '\'' +
-                '}';
+        return "город " +
+                "id = " + cityId + " " +
+                 name + " " + ", количество сотрудников: " + employees.size();
     }
+
+
 }

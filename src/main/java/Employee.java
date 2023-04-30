@@ -1,11 +1,13 @@
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "employee")
 public class Employee {
     @Id
-    private int id;
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -14,36 +16,27 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private int age;
-    @Column(name = "city_id")
-    private int cityId;
 
-    public int getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
-    }
-
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
     public Employee(){
     }
 
 
 
-    public Employee(int id, String firstName, String lastName, String gender, int age, int cityId) {
-        this.id = id;
+    public Employee(String firstName, String lastName, String gender, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.age = age;
-        this.cityId = cityId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -79,6 +72,14 @@ public class Employee {
         this.age = age;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -87,7 +88,9 @@ public class Employee {
                 ", last_name='" + lastName + '\'' +
                 ", gender='" + gender + '\'' +
                 ", age=" + age +
-                ", cityId='" + cityId + '\'' +
+                ", cityId= " + city.getCityId() + '\'' +
                 '}';
     }
+
+
 }
